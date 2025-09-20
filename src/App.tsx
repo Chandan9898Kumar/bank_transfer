@@ -4,22 +4,25 @@ import { AccountPage } from "./Account";
 import { PayeePage } from "./Payee";
 import { TransferAmountPage } from "./Amount";
 import { TransferSuccessPage } from "./Success";
+import "./App.css";
 // import { NotFound } from './pages/NotFound';
 
 // src/App.js
 function App() {
   return (
-    <BrowserRouter>
-      <TransactionProvider>
-        <Routes>
-          <Route path="/" element={<AccountPage />} />
-          <Route path="/transfer/payee" element={<PayeePage />} />
-          <Route path="/transfer/amount" element={<TransferAmountPage />} />
-          <Route path="/transfer/success" element={<TransferSuccessPage />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
-        </Routes>
-      </TransactionProvider>
-    </BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
+        <TransactionProvider>
+          <Routes>
+            <Route path="/" element={<AccountPage />} />
+            <Route path="/transfer/payee" element={<PayeePage />} />
+            <Route path="/transfer/amount" element={<TransferAmountPage />} />
+            <Route path="/transfer/success" element={<TransferSuccessPage />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
+          </Routes>
+        </TransactionProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -14,6 +14,8 @@ export interface Payee {
   id: string;
   name: string;
   bankName: string;
+  description?: string;
+  reference?: string;
 }
 
 export interface TransferData {

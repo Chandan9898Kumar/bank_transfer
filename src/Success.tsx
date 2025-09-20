@@ -3,6 +3,7 @@ import { useTransaction } from "./Context";
 import { useNavigate } from "react-router-dom";
 import { TransactionGuard } from "./Gaurd";
 import { useEffect } from "react";
+import "./Success.css";
 
 import type { Account, Payee } from "./Context";
 
@@ -22,12 +23,17 @@ export const TransferSuccessPage = () => {
   console.log("success page:", account, amount, payee);
   return (
     <TransactionGuard requiredStep="amount">
-      <div>
+      <div className="success-page">
+        <div className="checkmark">✓</div>
         <h2>Transfer Successful!</h2>
-        <p>From: {account?.name}</p>
-        <p>To: {payee?.name}</p>
-        <p>Amount: ${amount}</p>
-        <button onClick={resetTransaction}>Return to Accounts</button>
+        <div className="transaction-summary">
+          <p>From: {account?.name}</p>
+          <p>To: {payee?.name}</p>
+          <p className="amount">Amount: ${amount}</p>
+        </div>
+        <button className="return-button" onClick={resetTransaction}>
+          Return to Accounts
+        </button>
       </div>
     </TransactionGuard>
   );

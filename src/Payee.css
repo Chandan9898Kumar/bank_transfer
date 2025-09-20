@@ -1,0 +1,92 @@
+.payee-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.payee-page h2 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.payee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payee-button {
+  padding: 1.5rem;
+  border: 2px solid #e8f5e8;
+  border-radius: 8px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.payee-button:hover {
+  background: #e8f5e8;
+  border-color: #4caf50;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.payee-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payee-details h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.payee-details p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.bank-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4caf50;
+}
+
+.payee-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.payee-button {
+  flex: 1;
+}
+
+.info-button {
+  padding: 1rem;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.info-button:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}

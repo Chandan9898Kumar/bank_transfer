@@ -2,6 +2,7 @@
 import { useTransaction } from "./Context";
 import type { Account } from "./Context";
 import { useNavigate } from "react-router-dom";
+import "./Account.css";
 
 const mockAccounts: Account[] = [
   {
@@ -37,13 +38,22 @@ export const AccountPage = () => {
   };
   console.log("AccountPage:", rest);
   return (
-    <div>
+    <div className="account-page">
       <h2>Select an Account</h2>
-      {mockAccounts.map((acc) => (
-        <button key={acc.id} onClick={() => handleSelectAccount(acc)}>
-          {acc.name}
-        </button>
-      ))}
+      <div className="account-list">
+        {mockAccounts.map((acc) => (
+          <button key={acc.id} className="account-button" onClick={() => handleSelectAccount(acc)}>
+            <div className="account-info">
+              <div className="account-details">
+                <h3>{acc.name}</h3>
+                <p>Account: {acc.accountNumber}</p>
+                <p>Type: {acc.type}</p>
+              </div>
+              <div className="account-balance">${acc.balance}</div>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
