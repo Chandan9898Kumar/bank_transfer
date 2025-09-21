@@ -1,0 +1,83 @@
+/* Virtualized List Styles */
+.virtualized-list {
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.virtualized-list.scrolling {
+  pointer-events: none;
+}
+
+.virtualized-list.scrolling * {
+  pointer-events: auto;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .virtualized-list {
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* iOS specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .virtualized-list {
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Android specific optimizations */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+  .virtualized-list {
+    overscroll-behavior: contain;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .virtualized-list {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Scrollbar styling */
+.virtualized-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.virtualized-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.virtualized-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.virtualized-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Firefox scrollbar */
+.virtualized-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Performance optimizations */
+.virtualized-list > div > div {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .virtualized-list {
+    scroll-behavior: auto;
+  }
+}

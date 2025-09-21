@@ -1,24 +1,71 @@
-.payee-page {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+:root {
+  --header-height: clamp(80px, 15vh, 120px);
+  --footer-height: clamp(60px, 10vh, 80px);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-.payee-page h2 {
+.payee-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+}
+
+.payee-header {
+  flex-shrink: 0;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #e8f5e8;
+}
+
+.payee-list-container {
+  flex: 1;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.payee-footer {
+  flex-shrink: 0;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-top: 1px solid #e8f5e8;
+}
+
+.payee-header h2 {
   color: #2c3e50;
-  margin-bottom: 2rem;
+  margin: 0;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
   font-weight: 600;
 }
 
-.payee-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.add-payee-button {
+  width: 100%;
+  padding: 1rem;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+
+.add-payee-button:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.add-payee-button:active {
+  transform: translateY(0);
 }
 
 .payee-button {
@@ -89,4 +136,68 @@
   background: #1976d2;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+/* Mobile optimizations */
+.device-mobile .payee-button {
+  min-height: 44px;
+  padding: 1rem;
+}
+
+.device-mobile .info-button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.touch-enabled .payee-button:active {
+  transform: scale(0.98);
+  background-color: #e9ecef;
+}
+
+.has-notch .payee-page {
+  padding-top: env(safe-area-inset-top, 44px);
+}
+
+@media (max-width: 480px) {
+  .payee-page-container {
+    max-width: 100%;
+  }
+  
+  .payee-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .payee-list-container {
+    padding: 0 1rem;
+  }
+  
+  .payee-footer {
+    padding: 1rem;
+  }
+  
+  .payee-item {
+    margin-bottom: 0.75rem;
+  }
+  
+  .payee-button {
+    padding: 0.75rem;
+  }
+  
+  .payee-details h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .payee-header {
+    padding: 0.5rem 1rem;
+  }
+  
+  .payee-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .payee-footer {
+    padding: 0.75rem 1rem;
+  }
 }

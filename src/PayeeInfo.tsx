@@ -15,11 +15,7 @@ interface PayeeInfoProps {
 
 const PayeeInfo = ({ selectpayee, onClick }: PayeeInfoProps) => {
   const navigate = useNavigate();
-
-
-  console.log(selectpayee,'  selectpayee in payee info');
-
-  
+console.log(selectpayee, "  selectpayee in payee info");
   if (!selectpayee) {
     return (
       <div className="payee-info-page">

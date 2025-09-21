@@ -1,9 +1,10 @@
 // src/pages/TransferSuccessPage.js
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import type { Account, Payee } from "./Context";
 import { useTransaction } from "./Context";
 import { TransactionGuard } from "./Gaurd";
+import { ShareModal } from "./components/ShareModal";
 import "./Success.css";
 import type { NavigateFunction } from "react-router-dom";
 
@@ -21,37 +22,89 @@ const TransferSuccess = ({
   account,
   amount,
   payee,
-}: SuccessProps) => (
-  <div className="success-page">
-    <div className="success-card">
-      <div className="success-icon">✓</div>
-      <h2>Transfer Successful!</h2>
-      <p className="success-description">
-        Your money has been transferred successfully
-      </p>
-      <div className="transaction-summary">
-        <p>From: {account?.name}</p>
-        <p>To: {payee?.name}</p>
-        <p className="amount">Amount: ${amount}</p>
-      </div>
-      <div className="success-message">
-        <strong>Success:</strong> Transaction completed successfully
-      </div>
-      <div className="success-code">Code: TRF_SUCCESS</div>
-      <div className="success-actions">
-        <button className="primary-button" onClick={resetTransaction}>
-          Return to Accounts
-        </button>
-        <button
-          className="secondary-button"
-          onClick={() => navigate("/transfer/amount")}
-        >
-          Make Another Transfer
-        </button>
+}: SuccessProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [shareData, setShareData] = useState<{
+    title: string;
+    text: string;
+  } | null>(null);
+
+  const handleShare = () => {
+    const transactionDate = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const transactionId = `TXN${Date.now().toString().slice(-8)}`;
+
+    const shareText = `💰 Transfer Successful!
+
+📤 From: ${account?.name}
+📥 To: ${payee?.name}
+💵 Amount: $${amount}
+📅 Date: ${transactionDate}
+🔢 Transaction ID: ${transactionId}
+
+✅ Transaction completed successfully
+
+Sent via MyBank App 🏦`;
+
+    setShareData({
+      title: "Transaction Receipt",
+      text: shareText,
+    });
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setShareData(null);
+  };
+
+  return (
+    <div className="success-page">
+      <div className="success-card">
+        <div className="success-icon">✓</div>
+        <h2>Transfer Successful!</h2>
+        <p className="success-description">
+          Your money has been transferred successfully
+        </p>
+        <div className="transaction-summary">
+          <p>From: {account?.name}</p>
+          <p>To: {payee?.name}</p>
+          <p className="amount">Amount: ${amount}</p>
+        </div>
+        <div className="success-message">
+          <strong>Success:</strong> Transaction completed successfully
+        </div>
+        <div className="success-code">Code: TRF_SUCCESS</div>
+        <div className="success-actions">
+          <button className="share-button" onClick={handleShare}>
+            📤 Share Receipt
+          </button>
+          <button className="primary-button" onClick={resetTransaction}>
+            Return to Accounts
+          </button>
+          <button
+            className="secondary-button"
+            onClick={() => navigate("/transfer/amount")}
+          >
+            Make Another Transfer
+          </button>
+        </div>
+
+        <ShareModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          shareData={shareData}
+        />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const AddPayeeSuccess = ({ navigate }: Pick<SuccessProps, "navigate">) => (
   <div className="success-page">
