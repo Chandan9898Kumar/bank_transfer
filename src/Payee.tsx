@@ -8,8 +8,16 @@ import "./Payee.css";
 import PayeeInfo from "./PayeeInfo";
 
 const mockPayees = [
-  { id: "456", name: "John Doe", bankName: "ABC Bank" },
-  { id: "4567", name: "John york", bankName: "DBMS Bank" },
+  { id: "1", name: "John Doe", bankName: "ABC Bank" },
+  { id: "2", name: "John york", bankName: "DBMS Bank" },
+  { id: "3", name: "John Doer", bankName: "ABC Bank" },
+  { id: "4", name: "John yorker", bankName: "DBMS Bank" },
+  { id: "5", name: "John Doing", bankName: "ABC Bank" },
+  { id: "6", name: "tyson york", bankName: "DBMS Bank" },
+  { id: "7", name: "tyson Doe", bankName: "ABC Bank" },
+  { id: "8", name: "hero york", bankName: "DBMS Bank" },
+  { id: "9", name: "honda Doe", bankName: "ABC Bank" },
+  { id: "10", name: "randy york", bankName: "DBMS Bank" },
 ];
 
 export const PayeePage = () => {

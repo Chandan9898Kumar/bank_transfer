@@ -13,7 +13,7 @@ export const TransferAmountPage = () => {
 
   const handleConfirmTransfer = () => {
     setStepData("amount", amount);
-    navigate("/transfer/success", { replace: true });
+    navigate("/transfer/success?type=transfer", { replace: true });
   };
   console.log("amount page", rest);
   return (

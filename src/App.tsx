@@ -4,6 +4,8 @@ import { AccountPage } from "./Account";
 import { PayeePage } from "./Payee";
 import { TransferAmountPage } from "./Amount";
 import { TransferSuccessPage } from "./Success";
+
+import ErrorPage from "./Error";
 import "./App.css";
 // import { NotFound } from './pages/NotFound';
 
@@ -18,6 +20,7 @@ function App() {
             <Route path="/transfer/payee" element={<PayeePage />} />
             <Route path="/transfer/amount" element={<TransferAmountPage />} />
             <Route path="/transfer/success" element={<TransferSuccessPage />} />
+            <Route path="/transfer/error" element={<ErrorPage />} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </TransactionProvider>
