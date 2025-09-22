@@ -1,0 +1,31 @@
+.react-virtualized-list {
+  width: 100%;
+  position: relative;
+}
+
+.react-virtualized-list .ReactVirtualized__Grid {
+  outline: none !important;
+}
+
+.react-virtualized-list .ReactVirtualized__Grid__innerScrollContainer {
+  overflow: visible !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .react-virtualized-list {
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+  
+  .react-virtualized-list .ReactVirtualized__Grid {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Smooth scrolling for desktop */
+@media (min-width: 769px) {
+  .react-virtualized-list .ReactVirtualized__Grid {
+    scroll-behavior: smooth;
+  }
+}
