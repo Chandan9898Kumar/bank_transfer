@@ -2,21 +2,24 @@ import React from "react";
 import { Grid, AutoSizer, ColumnSizer } from "react-virtualized";
 import "react-virtualized/styles.css";
 import "./ReactVirtualizedList.css";
-interface VirtualizedListItem {
-  [key: string]: any;
+
+interface cellRenderer {
+  key: string;
+  rowIndex: number;
+  style: React.CSSProperties;
 }
 
-interface ReactVirtualizedListProps<T extends VirtualizedListItem> {
+// Remove VirtualizedListItem and use a generic type for items
+interface ReactVirtualizedListProps<T> {
   items: T[];
-  renderItem: (item: T, index: number) => React.ReactNode;
-  itemHeight?: number;
-  containerHeight?: number;
+  renderItem: (item: T, rowIndex: number) => React.ReactNode;
+  itemHeight: number;
+  getItemKey: (item: T, rowIndex: number) => string;
+  onItemClick?: (item: T) => void;
   className?: string;
-  getItemKey?: (item: T, index: number) => string | number;
-  onItemClick?: (item: T, index: number) => void;
+  containerHeight?: number | string;
 }
-
-export function ReactVirtualizedList<T extends VirtualizedListItem>({
+export function ReactVirtualizedList<T>({
   items,
   renderItem,
   itemHeight = 60,
@@ -26,7 +29,7 @@ export function ReactVirtualizedList<T extends VirtualizedListItem>({
 }: ReactVirtualizedListProps<T>) {
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
-  const cellRenderer = ({ key, rowIndex, style }: any) => {
+  const cellRenderer = ({ key, rowIndex, style }: cellRenderer) => {
     const item = items[rowIndex];
     if (!item) return null;
 
@@ -49,7 +52,10 @@ export function ReactVirtualizedList<T extends VirtualizedListItem>({
   };
 
   return (
-    <div className={`react-virtualized-list ${className}`} style={{ height: containerHeight || '100%' }}>
+    <div
+      className={`react-virtualized-list ${className}`}
+      style={{ height: containerHeight || "100%" }}
+    >
       <AutoSizer>
         {({ height, width }) => (
           <ColumnSizer
