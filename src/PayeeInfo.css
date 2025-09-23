@@ -1,175 +1,218 @@
-.payee-info-page {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+.payee-info-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.header {
+.payee-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px 20px;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.payee-info-page h1 {
+.back-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
   color: #2c3e50;
-  font-size: 1.8rem;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+  font-size: 20px;
   font-weight: 600;
+  color: #2c3e50;
   margin: 0;
-  flex: 1;
-  text-align: center;
 }
 
-.back-button {
-  width: 40px;
-  height: 40px;
-  border: none;
+.payee-profile-section {
+  background: white;
+  margin: 20px;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: #f0f0f0;
-  color: #2c3e50;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.back-button:hover {
-  background: #e0e0e0;
-  transform: scale(1.1);
+.avatar-text {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
 }
 
-.payee-card {
+.beneficiary-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 4px 0;
+}
+
+.bank-label {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.details-container {
+  background: white;
+  margin: 0 20px 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
   background: #f8f9fa;
-  border: 2px solid #4caf50;
-  border-radius: 12px;
-  padding: 2rem;
-  text-align: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e9ecef;
 }
 
-.payee-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #4caf50;
+.section-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.info-grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  word-break: break-word;
+}
+
+.action-section {
+  padding: 20px;
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.primary-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0 auto 1.5rem;
+  gap: 12px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-.payee-name {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.payee-bank {
-  font-size: 1.1rem;
-  color: #4caf50;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-}
-
-.payee-details {
-  text-align: left;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 1.5rem;
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.8rem 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.detail-label {
-  font-weight: 500;
-  color: #666;
-}
-
-.detail-value {
-  color: #2c3e50;
-  font-weight: 500;
-}
-
-.no-payee {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  padding: 2rem;
-}
-
-.transfer-button {
-  width: 100%;
-  padding: 1rem;
-  background: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1.5rem;
-}
-
-.transfer-button:hover {
-  background: #45a049;
+.primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
 
-/* Mobile optimizations */
-.device-mobile .back-button {
-  min-width: 44px;
-  min-height: 44px;
+.primary-btn:active {
+  transform: translateY(0);
 }
 
-.device-mobile .transfer-button {
-  min-height: 44px;
-  font-size: 1rem;
-}
-
-.touch-enabled .back-button:active {
-  transform: scale(0.95);
-}
-
-.touch-enabled .transfer-button:active {
-  transform: scale(0.98);
-}
-
-.has-notch .payee-info-page {
-  padding-top: env(safe-area-inset-top, 44px);
-}
-
-@media (max-width: 480px) {
-  .payee-info-page {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-  
-  .payee-avatar {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-  }
-  
-  .payee-name {
-    font-size: 1.25rem;
-  }
-  
-  .detail-row {
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .payee-profile-section {
+    margin: 16px;
+    padding: 20px;
     flex-direction: column;
-    gap: 0.25rem;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .details-container {
+    margin: 0 16px 16px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .info-item.full-width {
+    grid-column: 1;
+  }
+  
+  .action-section {
+    padding: 16px;
+  }
+}
+
+/* Desktop Responsive */
+@media (min-width: 1024px) {
+  .payee-info-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #f8f9fa;
+  }
+  
+  .payee-profile-section,
+  .details-container {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  
+  .action-section {
+    padding: 40px;
   }
 }

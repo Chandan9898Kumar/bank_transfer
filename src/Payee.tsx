@@ -41,11 +41,16 @@ const generateMockPayees = (count: number) => {
     "City Bank",
     "Trust Bank",
   ];
+  const streets = ["Main St", "Oak Ave", "Park Rd", "First St", "Second Ave", "Elm St"];
+  const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia"];
 
   return Array.from({ length: count }, (_, i) => ({
     id: (i + 1).toString(),
     name: `${names[i % names.length]} ${surnames[i % surnames.length]}`,
     bankName: banks[i % banks.length],
+    address: `${100 + i} ${streets[i % streets.length]}, ${cities[i % cities.length]}`,
+    account: `${1000000000 + i}`,
+    mobile: `+1${Math.floor(1000000000 + Math.random() * 9000000000)}`,
   }));
 };
 
