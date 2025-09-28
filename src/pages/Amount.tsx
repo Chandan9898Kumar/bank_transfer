@@ -1,8 +1,8 @@
 // src/pages/TransferAmountPage.js
-import { useTransaction } from "./Context";
-import type { Account, Payee } from "./Context";
+import { useTransaction } from "../contexts";
+import type { Account, Payee } from "../contexts";
 import { useNavigate } from "react-router-dom";
-import { TransactionGuard } from "./Gaurd";
+import { TransactionGuard } from "../guards";
 import { useState } from "react";
 import "./Amount.css";
 

@@ -1,10 +1,10 @@
 // src/pages/PayeePage.js
 import { useState, useEffect, useRef } from "react";
-import { useTransaction } from "./Context";
-import type { Payee } from "./Context";
+import { useTransaction } from "../contexts";
+import type { Payee } from "../contexts";
 import { useNavigate } from "react-router-dom";
-import { TransactionGuard } from "./Gaurd";
-import { VirtualizedList } from "./components/VirtualizedList";
+import { TransactionGuard } from "../guards";
+import { VirtualizedList } from "../components";
 import "./Payee.css";
 import PayeeInfo from "./PayeeInfo";
 

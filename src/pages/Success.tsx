@@ -1,10 +1,10 @@
 // src/pages/TransferSuccessPage.js
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import type { Account, Payee } from "./Context";
-import { useTransaction } from "./Context";
-import { TransactionGuard } from "./Gaurd";
-import { ShareModal } from "./components/ShareModal";
+import type { Account, Payee } from "../contexts";
+import { useTransaction } from "../contexts";
+import { TransactionGuard } from "../guards";
+import { ShareModal } from "../components";
 import "./Success.css";
 import type { NavigateFunction } from "react-router-dom";
 

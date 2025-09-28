@@ -1,8 +1,7 @@
-import { useTransaction } from "./Context";
-import type { Account } from "./Context";
+import { useTransaction } from "../contexts";
+import type { Account } from "../contexts";
 import { useNavigate } from "react-router-dom";
-import { ReactVirtualizedList } from "./components/ReactVirtualizedList";
-import { SEO } from "./components/SEO";
+import { ReactVirtualizedList, SEO } from "../components";
 
 import "./Account.css";
 

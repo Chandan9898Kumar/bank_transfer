@@ -1,6 +1,6 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import type { NavigateFunction } from "react-router-dom";
-import { useTransaction } from "./Context";
+import { useTransaction } from "../contexts";
 import "./Error.css";
 
 interface ErrorProps {

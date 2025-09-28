@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
-import { TransactionProvider } from "./Context";
-import { ErrorBoundary } from "./components/ErrorBoundary";
+import { TransactionProvider } from "./contexts";
 import { 
+  ErrorBoundary,
+  SEO,
   LazyAccountPage, 
   LazyPayeePage, 
   LazyTransferAmountPage, 
   LazyTransferSuccessPage, 
   LazyErrorPage,
   withSuspense 
-} from "./components/LazyComponents";
-import { SEO } from "./components/SEO";
-import "./App.css";
+} from "./components";
+import "./styles/App.css";
 
 const AccountPageWithSuspense = withSuspense(LazyAccountPage);
 const PayeePageWithSuspense = withSuspense(LazyPayeePage);

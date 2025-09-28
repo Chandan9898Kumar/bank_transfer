@@ -8,23 +8,23 @@ const LoadingSpinner = () => (
 );
 
 export const LazyAccountPage = lazy(() => 
-  import('../Account').then(module => ({ default: module.AccountPage }))
+  import('../pages').then(module => ({ default: module.AccountPage }))
 );
 
 export const LazyPayeePage = lazy(() => 
-  import('../Payee').then(module => ({ default: module.PayeePage }))
+  import('../pages').then(module => ({ default: module.PayeePage }))
 );
 
 export const LazyTransferAmountPage = lazy(() => 
-  import('../Amount').then(module => ({ default: module.TransferAmountPage }))
+  import('../pages').then(module => ({ default: module.TransferAmountPage }))
 );
 
 export const LazyTransferSuccessPage = lazy(() => 
-  import('../Success').then(module => ({ default: module.TransferSuccessPage }))
+  import('../pages').then(module => ({ default: module.TransferSuccessPage }))
 );
 
 export const LazyErrorPage = lazy(() => 
-  import('../Error').then(module => ({ default: module.default || module }))
+  import('../pages').then(module => ({ default: module.ErrorPage }))
 );
 
 export const withSuspense = (Component: React.ComponentType) => (props: any) => (

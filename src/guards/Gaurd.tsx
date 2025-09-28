@@ -1,7 +1,7 @@
 // src/components/TransactionGuard.js
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTransaction } from "./Context";
+import { useTransaction } from "../contexts";
 
 interface TransactionGuardProps {
   requiredStep: keyof ReturnType<typeof useTransaction>["transactionData"];
