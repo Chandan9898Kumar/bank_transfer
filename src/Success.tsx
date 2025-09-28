@@ -65,36 +65,57 @@ Sent via MyBank App 🏦`;
   };
 
   return (
-    <div className="success-page">
-      <div className="success-card">
-        <div className="success-icon">✓</div>
-        <h2>Transfer Successful!</h2>
+    <main className="success-page" role="main">
+      <div className="success-card" role="status" aria-live="polite">
+        <div className="success-icon" aria-hidden="true">✓</div>
+        <h1 id="success-title">Transfer Successful!</h1>
         <p className="success-description">
           Your money has been transferred successfully
         </p>
-        <div className="transaction-summary">
-          <p>From: {account?.name}</p>
-          <p>To: {payee?.name}</p>
-          <p className="amount">Amount: ${amount}</p>
-        </div>
-        <div className="success-message">
+        
+        <section className="transaction-summary" aria-labelledby="summary-title">
+          <h2 id="summary-title" className="sr-only">Transaction Summary</h2>
+          <dl className="transaction-details">
+            <dt>From:</dt>
+            <dd>{account?.name}</dd>
+            <dt>To:</dt>
+            <dd>{payee?.name}</dd>
+            <dt>Amount:</dt>
+            <dd className="amount">${amount}</dd>
+          </dl>
+        </section>
+        
+        <div className="success-message" role="status">
           <strong>Success:</strong> Transaction completed successfully
         </div>
-        <div className="success-code">Code: TRF_SUCCESS</div>
-        <div className="success-actions">
-          <button className="share-button" onClick={handleShare}>
-            📤 Share Receipt
+        <div className="success-code" aria-label="Transaction reference code">Code: TRF_SUCCESS</div>
+        
+        <nav className="success-actions" aria-label="Available actions">
+          <button 
+            className="share-button" 
+            onClick={handleShare}
+            aria-label="Share transaction receipt"
+            type="button"
+          >
+            <span aria-hidden="true">📤</span> Share Receipt
           </button>
-          <button className="primary-button" onClick={resetTransaction}>
+          <button 
+            className="primary-button" 
+            onClick={resetTransaction}
+            aria-label="Return to account selection page"
+            type="button"
+          >
             Return to Accounts
           </button>
           <button
             className="secondary-button"
             onClick={() => navigate("/transfer/amount")}
+            aria-label="Start a new money transfer"
+            type="button"
           >
             Make Another Transfer
           </button>
-        </div>
+        </nav>
 
         <ShareModal
           isOpen={isModalOpen}
@@ -102,7 +123,7 @@ Sent via MyBank App 🏦`;
           shareData={shareData}
         />
       </div>
-    </div>
+    </main>
   );
 };
 

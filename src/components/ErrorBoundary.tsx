@@ -27,10 +27,16 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return this.props.fallback || (
-        <div className="error-boundary">
-          <h2>Something went wrong with your banking session</h2>
-          <p>Please refresh the page or contact support if the issue persists.</p>
-          <button onClick={() => window.location.reload()}>Refresh Page</button>
+        <div className="error-boundary" role="alert" aria-live="assertive">
+          <h2 id="error-title">Something went wrong with your banking session</h2>
+          <p aria-describedby="error-title">Please refresh the page or contact support if the issue persists.</p>
+          <button 
+            onClick={() => window.location.reload()}
+            aria-label="Refresh page to resolve banking session error"
+            type="button"
+          >
+            Refresh Page
+          </button>
         </div>
       );
     }

@@ -137,36 +137,54 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   ];
 
   return (
-    <div className="share-modal-overlay" onClick={onClose}>
-      <div className="share-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="share-header">
-          <h3>Share Receipt</h3>
-          <button className="share-close-btn" onClick={onClose}>
-            ×
+    <div 
+      className="share-modal-overlay" 
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="share-title"
+    >
+      <div 
+        className="share-modal" 
+        onClick={(e) => e.stopPropagation()}
+        role="document"
+      >
+        <header className="share-header">
+          <h3 id="share-title">Share Receipt</h3>
+          <button 
+            className="share-close-btn" 
+            onClick={onClose}
+            aria-label="Close share dialog"
+            type="button"
+          >
+            <span aria-hidden="true">×</span>
           </button>
-        </div>
+        </header>
 
-        <div className="share-preview">
-          <div className="share-preview-content">
+        <section className="share-preview" aria-labelledby="preview-title">
+          <h4 id="preview-title" className="sr-only">Receipt Preview</h4>
+          <div className="share-preview-content" role="document">
             {text.split("\n").map((line, index) => (
               <p key={index}>{line}</p>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="share-options-grid">
+        <nav className="share-options-grid" aria-label="Share options">
           {shareOptions.map((option) => (
             <button
               key={option.name}
               className="share-option-btn"
               style={{ "--option-color": option.color } as React.CSSProperties}
               onClick={() => option.action(text)}
+              aria-label={`Share via ${option.name}`}
+              type="button"
             >
-              <div className="share-option-icon">{option.icon}</div>
+              <div className="share-option-icon" aria-hidden="true">{option.icon}</div>
               <span className="share-option-name">{option.name}</span>
             </button>
           ))}
-        </div>
+        </nav>
       </div>
     </div>
   );

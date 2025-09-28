@@ -9,30 +9,37 @@ interface ErrorProps {
 }
 
 const TransferError = ({ navigate, resetTransaction }: ErrorProps) => (
-  <div className="error-page">
-    <div className="error-container">
-      <div className="error-icon">💸</div>
-      <h1 className="error-title">Transfer Failed</h1>
-      <p className="error-description">
+  <main className="error-page" role="main">
+    <div className="error-container" role="alert" aria-live="assertive">
+      <div className="error-icon" aria-hidden="true">💸</div>
+      <h1 className="error-title" id="error-title">Transfer Failed</h1>
+      <p className="error-description" aria-describedby="error-title">
         Your money transfer could not be completed
       </p>
-      <div className="error-message">
+      <div className="error-message" role="status">
         <strong>Error:</strong> Insufficient funds or network error occurred
       </div>
-      <div className="error-code">Code: TRF_001</div>
-      <div className="error-actions">
+      <div className="error-code" aria-label="Error reference code">Code: TRF_001</div>
+      <nav className="error-actions" aria-label="Error recovery options">
         <button
           className="primary-button"
           onClick={() => navigate("/transfer/amount")}
+          aria-label="Return to transfer amount page to try again"
+          type="button"
         >
           Try Again
         </button>
-        <button className="secondary-button" onClick={resetTransaction}>
+        <button 
+          className="secondary-button" 
+          onClick={resetTransaction}
+          aria-label="Return to home page"
+          type="button"
+        >
           Go Home
         </button>
-      </div>
+      </nav>
     </div>
-  </div>
+  </main>
 );
 
 const AddPayeeError = ({ navigate }: Pick<ErrorProps, "navigate">) => (

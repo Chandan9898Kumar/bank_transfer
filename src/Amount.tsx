@@ -18,29 +18,59 @@ export const TransferAmountPage = () => {
   console.log("amount page", rest);
   return (
     <TransactionGuard requiredStep="payee">
-      <div className="amount-page">
-        <h2>Enter Transfer Amount</h2>
-        <div className="transfer-details">
-          <p>Transferring from: {(getStepData("account") as Account)?.name}</p>
-          <p>Transferring to: {(getStepData("payee") as Payee)?.name}</p>
-        </div>
-        <div className="amount-input-group">
-          <input
-            className="amount-input"
-            type="number"
-            placeholder="Enter amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-        <button
-          className="confirm-button"
-          onClick={handleConfirmTransfer}
-          disabled={!amount}
-        >
-          Confirm Transfer
-        </button>
-      </div>
+      <main className="amount-page" role="main">
+        <header>
+          <h1 id="amount-title">Enter Transfer Amount</h1>
+        </header>
+        
+        <section className="transfer-details" aria-labelledby="transfer-summary">
+          <h2 id="transfer-summary" className="sr-only">Transfer Summary</h2>
+          <dl className="transfer-info">
+            <dt>Transferring from:</dt>
+            <dd>{(getStepData("account") as Account)?.name}</dd>
+            <dt>Transferring to:</dt>
+            <dd>{(getStepData("payee") as Payee)?.name}</dd>
+          </dl>
+        </section>
+        
+        <form onSubmit={(e) => { e.preventDefault(); handleConfirmTransfer(); }}>
+          <div className="amount-input-group">
+            <label htmlFor="transfer-amount" className="amount-label">
+              Transfer Amount ($)
+            </label>
+            <input
+              id="transfer-amount"
+              className="amount-input"
+              type="number"
+              min="0.01"
+              step="0.01"
+              placeholder="0.00"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              aria-describedby="amount-help"
+              aria-required="true"
+              autoComplete="off"
+            />
+            <div id="amount-help" className="input-help">
+              Enter the amount you want to transfer
+            </div>
+          </div>
+          
+          <button
+            className="confirm-button"
+            type="submit"
+            disabled={!amount || parseFloat(amount) <= 0}
+            aria-describedby="confirm-help"
+          >
+            Confirm Transfer
+          </button>
+          <div id="confirm-help" className="sr-only">
+            {!amount || parseFloat(amount) <= 0 
+              ? "Please enter a valid amount to continue" 
+              : "Click to proceed with the money transfer"}
+          </div>
+        </form>
+      </main>
     </TransactionGuard>
   );
 };

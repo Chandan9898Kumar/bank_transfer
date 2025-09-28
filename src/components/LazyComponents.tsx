@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
 
 const LoadingSpinner = () => (
-  <div className="loading-spinner" role="status" aria-label="Loading">
-    <div className="spinner"></div>
-    <span className="sr-only">Loading...</span>
+  <div className="loading-spinner" role="status" aria-live="polite" aria-label="Loading banking content">
+    <div className="spinner" aria-hidden="true"></div>
+    <span className="sr-only">Loading banking content, please wait...</span>
   </div>
 );
 

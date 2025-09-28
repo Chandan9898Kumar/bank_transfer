@@ -33,6 +33,11 @@ export const SEO = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       
+      {/* Accessibility meta tags */}
+      <meta name="theme-color" content="#1976d2" />
+      <meta name="color-scheme" content="light dark" />
+      <meta name="format-detection" content="telephone=no" />
+      
       {structuredData && (
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}

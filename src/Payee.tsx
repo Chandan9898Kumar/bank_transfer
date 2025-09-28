@@ -101,52 +101,68 @@ export const PayeePage = () => {
   }
   return (
     <TransactionGuard requiredStep="account">
-      <div className="payee-page-container">
-        <div className="payee-header" ref={headerRef}>
-          <h2>
+      <main className="payee-page-container" role="main">
+        <header className="payee-header" ref={headerRef}>
+          <h1 id="payee-title">
             Select a Payee for Account{" "}
             {selectedAccount &&
             typeof selectedAccount === "object" &&
             "name" in selectedAccount
               ? selectedAccount.name
               : ""}
-          </h2>
-        </div>
+          </h1>
+          <p className="sr-only">Choose a recipient from the list below to transfer money to</p>
+        </header>
         
-        <div className="payee-list-container">
-          <VirtualizedList
-            items={mockPayees}
-            itemHeight={80}
-            containerHeight={listHeight}
-            className="payee-list"
-            getItemKey={(payee) => payee.id}
-            renderItem={(payee) => (
-              <div className="payee-item">
-                <button
-                  className="payee-button"
-                  onClick={() => handleSelectPayee(payee)}
-                >
-                  <div className="payee-info">
-                    <div className="payee-details">
-                      <h3>{payee.name}</h3>
+        <section className="payee-list-container" aria-labelledby="payee-title">
+          <div role="listbox" aria-label="Available payees for money transfer">
+            <VirtualizedList
+              items={mockPayees}
+              itemHeight={80}
+              containerHeight={listHeight}
+              className="payee-list"
+              getItemKey={(payee) => payee.id}
+              renderItem={(payee) => (
+                <div className="payee-item" role="option" tabIndex={0}>
+                  <button
+                    className="payee-button"
+                    onClick={() => handleSelectPayee(payee)}
+                    aria-label={`Select ${payee.name} at ${payee.bankName} for money transfer`}
+                    type="button"
+                  >
+                    <div className="payee-info">
+                      <div className="payee-details">
+                        <h3>{payee.name}</h3>
+                      </div>
+                      <div className="bank-name" aria-label={`Bank: ${payee.bankName}`}>{payee.bankName}</div>
                     </div>
-                    <div className="bank-name">{payee.bankName}</div>
-                  </div>
-                </button>
-                <button className="info-button" onClick={() => handleItem(payee)}>
-                  Info
-                </button>
-              </div>
-            )}
-          />
-        </div>
+                  </button>
+                  <button 
+                    className="info-button" 
+                    onClick={() => handleItem(payee)}
+                    aria-label={`View detailed information for ${payee.name}`}
+                    type="button"
+                  >
+                    <span aria-hidden="true">Info</span>
+                    <span className="sr-only">View details</span>
+                  </button>
+                </div>
+              )}
+            />
+          </div>
+        </section>
 
-        <div className="payee-footer" ref={footerRef}>
-          <button className="add-payee-button" onClick={() => navigate('/add-payee')}>
+        <footer className="payee-footer" ref={footerRef}>
+          <button 
+            className="add-payee-button" 
+            onClick={() => navigate('/add-payee')}
+            aria-label="Add a new payee to your contact list"
+            type="button"
+          >
             Add Payee
           </button>
-        </div>
-      </div>
+        </footer>
+      </main>
     </TransactionGuard>
   );
 };
