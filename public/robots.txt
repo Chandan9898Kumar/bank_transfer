@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /transfer/error
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://securebank.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

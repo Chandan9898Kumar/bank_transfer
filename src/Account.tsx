@@ -1,8 +1,8 @@
-// src/pages/AccountPage.js
 import { useTransaction } from "./Context";
 import type { Account } from "./Context";
 import { useNavigate } from "react-router-dom";
 import { ReactVirtualizedList } from "./components/ReactVirtualizedList";
+import { SEO } from "./components/SEO";
 
 import "./Account.css";
 
@@ -51,9 +51,39 @@ const mockAccounts: Account[] = [
   },
 ];
 
+const accountPageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Account Selection - SecureBank",
+  "description": "Select your bank account to start a secure money transfer",
+  "url": "https://securebank.com/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "SecureBank",
+    "url": "https://securebank.com"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://securebank.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Account Selection",
+        "item": "https://securebank.com/"
+      }
+    ]
+  }
+};
+
 export const AccountPage = () => {
   const navigate = useNavigate();
-  const { setStepData, ...rest } = useTransaction();
+  const { setStepData } = useTransaction();
 
   const handleSelectAccount = (account: Account) => {
     setStepData("account", account);
@@ -73,6 +103,8 @@ export const AccountPage = () => {
     <button
       className="account-button"
       onClick={() => handleSelectAccount(account)}
+      aria-label={`Select ${account.name} account with balance $${account.balance}`}
+      role="option"
     >
       <div className="account-info">
         <div className="account-details">
@@ -80,26 +112,54 @@ export const AccountPage = () => {
           <p>Account: {account.accountNumber}</p>
           <p>Type: {account.type}</p>
         </div>
-        <div className="account-balance">${account.balance}</div>
+        <div className="account-balance" aria-label={`Balance: $${account.balance}`}>
+          ${account.balance}
+        </div>
       </div>
     </button>
   );
 
-  console.log("AccountPage:", rest);
   return (
-    <div className="account-page">
-      <h2>Select an Account</h2>
-      <div className="account-list-container">
-        <ReactVirtualizedList
-          items={mockAccounts}
-          renderItem={renderAccountItem}
-          itemHeight={itemHeight}
-          getItemKey={(account) => account.id}
-          onItemClick={handleSelectAccount}
-          className="account-virtualized-list"
-        />
-      </div>
-      <button>Add Account</button>
-    </div>
+    <>
+      <SEO
+        title="Account Selection - SecureBank | Choose Your Account"
+        description="Select your bank account to start a secure money transfer. View account balances and manage your banking needs with SecureBank."
+        keywords="account selection, bank account, account balance, secure banking, money transfer"
+        canonical="https://securebank.com/"
+        structuredData={accountPageStructuredData}
+      />
+      <main className="account-page" role="main">
+        <header>
+          <h1>Select an Account</h1>
+          <p className="page-description">
+            Choose the account you'd like to transfer money from
+          </p>
+        </header>
+        
+        <section className="account-list-container" aria-label="Available accounts">
+          <div role="listbox" aria-label="Account selection list">
+            <ReactVirtualizedList
+              items={mockAccounts}
+              renderItem={renderAccountItem}
+              itemHeight={itemHeight}
+              containerHeight={400}
+              getItemKey={(account) => account.id}
+              onItemClick={handleSelectAccount}
+              className="account-virtualized-list"
+            />
+          </div>
+        </section>
+        
+        <footer className="page-actions">
+          <button 
+            className="add-account-btn"
+            aria-label="Add a new bank account"
+          >
+            Add Account
+          </button>
+        </footer>
+      </main>
+    </>
   );
 };
+

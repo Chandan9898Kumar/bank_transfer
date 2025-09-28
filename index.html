@@ -2,9 +2,91 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>SecureBank - Online Banking & Money Transfer | Safe & Fast</title>
+    <meta name="title" content="SecureBank - Online Banking & Money Transfer | Safe & Fast" />
+    <meta name="description" content="Experience secure online banking with instant money transfers, account management, and 24/7 access. Bank safely with advanced encryption and fraud protection." />
+    <meta name="keywords" content="online banking, money transfer, secure banking, digital banking, account management, financial services" />
+    <meta name="author" content="SecureBank" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://securebank.com/" />
+    <meta property="og:title" content="SecureBank - Online Banking & Money Transfer" />
+    <meta property="og:description" content="Experience secure online banking with instant money transfers, account management, and 24/7 access." />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://securebank.com/" />
+    <meta property="twitter:title" content="SecureBank - Online Banking & Money Transfer" />
+    <meta property="twitter:description" content="Experience secure online banking with instant money transfers, account management, and 24/7 access." />
+    <meta property="twitter:image" content="/twitter-image.jpg" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://securebank.com/" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "SecureBank",
+      "description": "Secure online banking and money transfer services",
+      "url": "https://securebank.com",
+      "logo": "https://securebank.com/logo.png",
+      "sameAs": [
+        "https://facebook.com/securebank",
+        "https://twitter.com/securebank",
+        "https://linkedin.com/company/securebank"
+      ],
+      "serviceType": "Online Banking",
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Banking Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Money Transfer",
+              "description": "Instant and secure money transfers"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Account Management",
+              "description": "Complete online account management"
+            }
+          }
+        ]
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

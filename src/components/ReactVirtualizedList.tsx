@@ -12,9 +12,9 @@ interface cellRenderer {
 // Remove VirtualizedListItem and use a generic type for items
 interface ReactVirtualizedListProps<T> {
   items: T[];
-  renderItem: (item: T, rowIndex: number) => React.ReactNode;
+  renderItem: (item: T) => React.ReactNode;
   itemHeight: number;
-  getItemKey: (item: T, rowIndex: number) => string;
+  getItemKey: (item: T) => string;
   onItemClick?: (item: T) => void;
   className?: string;
   containerHeight?: number | string;
@@ -33,7 +33,7 @@ export function ReactVirtualizedList<T>({
     const item = items[rowIndex];
     if (!item) return null;
 
-    const itemKey = getItemKey ? getItemKey(item, rowIndex) : key;
+    const itemKey = getItemKey ? getItemKey(item) : key;
 
     return (
       <div
@@ -46,7 +46,7 @@ export function ReactVirtualizedList<T>({
           padding: "4px 0",
         }}
       >
-        {renderItem(item, rowIndex)}
+        {renderItem(item)}
       </div>
     );
   };

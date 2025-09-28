@@ -1,4 +1,3 @@
-import React from "react";
 import { ReactVirtualizedList } from "./ReactVirtualizedList";
 import "./ReactVirtualizedList.css";
 
@@ -19,14 +18,14 @@ export function VirtualizedListExample() {
     date: new Date(Date.now() - Math.random() * 10000000000).toLocaleDateString(),
   }));
 
-  const renderItem = (item: ExampleItem, index: number) => (
+  const renderItem = (item: ExampleItem) => (
     <div style={{
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       padding: "12px",
       borderBottom: "1px solid #eee",
-      backgroundColor: index % 2 === 0 ? "#f9f9f9" : "#fff",
+      backgroundColor: "#f9f9f9",
     }}>
       <div>
         <div style={{ fontWeight: "bold" }}>{item.name}</div>
@@ -38,8 +37,8 @@ export function VirtualizedListExample() {
     </div>
   );
 
-  const handleItemClick = (item: ExampleItem, index: number) => {
-    console.log("Clicked item:", item, "at index:", index);
+  const handleItemClick = (item: ExampleItem) => {
+    console.log("Clicked item:", item);
   };
 
   return (
@@ -50,7 +49,7 @@ export function VirtualizedListExample() {
         renderItem={renderItem}
         itemHeight={60}
         containerHeight={500}
-        getItemKey={(item) => item.id}
+        getItemKey={(item) => item.id.toString()}
         onItemClick={handleItemClick}
         className="transaction-list"
       />

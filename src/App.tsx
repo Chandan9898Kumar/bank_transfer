@@ -1,31 +1,45 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import { TransactionProvider } from "./Context";
-import { AccountPage } from "./Account";
-import { PayeePage } from "./Payee";
-import { TransferAmountPage } from "./Amount";
-import { TransferSuccessPage } from "./Success";
-
-import ErrorPage from "./Error";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { 
+  LazyAccountPage, 
+  LazyPayeePage, 
+  LazyTransferAmountPage, 
+  LazyTransferSuccessPage, 
+  LazyErrorPage,
+  withSuspense 
+} from "./components/LazyComponents";
+import { SEO } from "./components/SEO";
 import "./App.css";
-// import { NotFound } from './pages/NotFound';
 
-// src/App.js
+const AccountPageWithSuspense = withSuspense(LazyAccountPage);
+const PayeePageWithSuspense = withSuspense(LazyPayeePage);
+const TransferAmountPageWithSuspense = withSuspense(LazyTransferAmountPage);
+const TransferSuccessPageWithSuspense = withSuspense(LazyTransferSuccessPage);
+const ErrorPageWithSuspense = withSuspense(LazyErrorPage);
+
 function App() {
   return (
-    <div className="app">
-      <BrowserRouter>
-        <TransactionProvider>
-          <Routes>
-            <Route path="/" element={<AccountPage />} />
-            <Route path="/transfer/payee" element={<PayeePage />} />
-            <Route path="/transfer/amount" element={<TransferAmountPage />} />
-            <Route path="/transfer/success" element={<TransferSuccessPage />} />
-            <Route path="/transfer/error" element={<ErrorPage />} />
-            {/* <Route path="*" element={<NotFound />} /> */}
-          </Routes>
-        </TransactionProvider>
-      </BrowserRouter>
-    </div>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <div className="app">
+          <SEO />
+          <BrowserRouter>
+            <TransactionProvider>
+              <Routes>
+                <Route path="/" element={<AccountPageWithSuspense />} />
+                <Route path="/transfer/payee" element={<PayeePageWithSuspense />} />
+                <Route path="/transfer/amount" element={<TransferAmountPageWithSuspense />} />
+                <Route path="/transfer/success" element={<TransferSuccessPageWithSuspense />} />
+                <Route path="/transfer/error" element={<ErrorPageWithSuspense />} />
+                <Route path="*" element={<ErrorPageWithSuspense />} />
+              </Routes>
+            </TransactionProvider>
+          </BrowserRouter>
+        </div>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

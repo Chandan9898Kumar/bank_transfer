@@ -1,14 +1,38 @@
-* {
+/* CSS Reset with performance optimizations */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Root variables for consistent theming */
+:root {
+  --primary-color: #1976d2;
+  --secondary-color: #667eea;
+  --success-color: #4caf50;
+  --error-color: #f44336;
+  --warning-color: #ff9800;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Performance optimized body */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--background-gradient);
+  background-attachment: fixed;
   min-height: 100vh;
-  color: #333;
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .app {
@@ -18,21 +42,117 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  contain: layout style paint;
 }
 
-/* Global button styles */
+/* Accessible button styles */
 button {
   font-family: inherit;
   border: none;
   outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Global input styles */
+button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Accessible input styles */
 input {
   font-family: inherit;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  border: 2px solid transparent;
 }
 
-/* Responsive design */
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading spinner with accessibility */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  will-change: transform;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error boundary styles */
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.error-boundary h2 {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.error-boundary button {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.error-boundary button:hover {
+  background: #1565c0;
+}
+
+/* Responsive design with performance considerations */
 @media (max-width: 768px) {
   .app {
     padding: 0.5rem;
@@ -44,27 +164,52 @@ input {
   .success-page {
     margin: 1rem auto;
     padding: 1.5rem;
+    width: 100%;
+    max-width: none;
   }
 }
 
-/* Loading animation */
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
+@media (max-width: 480px) {
+  :root {
+    font-size: 14px;
+  }
+  
+  .app {
+    padding: 0.25rem;
+  }
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #000;
+    --text-secondary: #333;
+  }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .app {
+    background: white !important;
+  }
+  
+  button {
+    display: none;
+  }
 }
