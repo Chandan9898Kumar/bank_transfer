@@ -54,7 +54,7 @@ const generateMockPayees = (count: number) => {
   }));
 };
 
-const mockPayees = generateMockPayees(1000);
+const mockPayees = generateMockPayees(20);
 
 export const PayeePage = () => {
   const [isInfo, setIsInfo] = useState(false);
