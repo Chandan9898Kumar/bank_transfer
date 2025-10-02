@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { useTransaction } from "../contexts";
 import type { Account } from "../contexts";
 import { useNavigate } from "react-router-dom";
@@ -81,6 +82,9 @@ const accountPageStructuredData = {
 };
 
 export const AccountPage = () => {
+  const [listHeight, setListHeight] = useState(400);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { setStepData } = useTransaction();
 
@@ -97,6 +101,25 @@ export const AccountPage = () => {
     return 115;
   };
   const itemHeight = getItemHeight();
+
+  useEffect(() => {
+    const calculateHeight = () => {
+      const headerHeight = headerRef.current?.offsetHeight || 100;
+      const footerHeight = footerRef.current?.offsetHeight || 80;
+      const padding = 32;
+      const availableHeight = window.innerHeight - headerHeight - footerHeight - padding;
+      setListHeight(Math.max(300, availableHeight));
+    };
+
+    calculateHeight();
+    window.addEventListener('resize', calculateHeight);
+    window.addEventListener('orientationchange', calculateHeight);
+
+    return () => {
+      window.removeEventListener('resize', calculateHeight);
+      window.removeEventListener('orientationchange', calculateHeight);
+    };
+  }, []);
 
   const renderAccountItem = (account: Account) => (
     <button
@@ -128,7 +151,7 @@ export const AccountPage = () => {
         structuredData={accountPageStructuredData}
       />
       <main className="account-page" role="main">
-        <header>
+        <header ref={headerRef}>
           <h1>Select an Account</h1>
           <p className="page-description">
             Choose the account you'd like to transfer money from
@@ -141,7 +164,7 @@ export const AccountPage = () => {
               items={mockAccounts}
               renderItem={renderAccountItem}
               itemHeight={itemHeight}
-              containerHeight={400}
+              containerHeight={listHeight}
               getItemKey={(account) => account.id}
               onItemClick={handleSelectAccount}
               className="account-virtualized-list"
@@ -149,12 +172,12 @@ export const AccountPage = () => {
           </div>
         </section>
         
-        <footer className="page-actions">
+        <footer className="page-actions" ref={footerRef}>
           <button 
             className="add-account-btn"
             aria-label="Add a new bank account"
           >
-            Add Account
+            + Add New Account
           </button>
         </footer>
       </main>

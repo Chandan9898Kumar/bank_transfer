@@ -1,203 +1,436 @@
+/* CSS Custom Properties for consistent theming */
 :root {
-  --header-height: clamp(80px, 15vh, 120px);
-  --footer-height: clamp(60px, 10vh, 80px);
+  --payee-primary: #667eea;
+  --payee-secondary: #764ba2;
+  --payee-success: #10b981;
+  --payee-info: #3b82f6;
+  --payee-text-primary: #1e293b;
+  --payee-text-secondary: #64748b;
+  --payee-bg-primary: #f8fafc;
+  --payee-bg-secondary: #e2e8f0;
+  --payee-border: #cbd5e1;
+  --payee-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --payee-radius: 16px;
+  --payee-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* Mobile-first responsive container */
 .payee-page-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  max-width: 600px;
-  margin: 0 auto;
-  background: #fff;
-  padding-top: var(--safe-area-top);
-  padding-bottom: var(--safe-area-bottom);
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 1rem;
+  padding-top: calc(var(--safe-area-top) + 1rem);
+  padding-bottom: calc(var(--safe-area-bottom) + 1rem);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .payee-header {
   flex-shrink: 0;
-  padding: 1rem 2rem;
-  background: #fff;
-  border-bottom: 1px solid #e8f5e8;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--payee-radius);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--payee-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.payee-header h1 {
+  color: var(--payee-text-primary);
+  margin: 0;
+  font-size: clamp(1.3rem, 5vw, 2rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--payee-primary) 0%, var(--payee-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
 }
 
 .payee-list-container {
   flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--payee-radius);
   overflow: hidden;
-  padding: 0 2rem;
+  box-shadow: var(--payee-shadow);
+  backdrop-filter: blur(10px);
+  margin-bottom: 1.5rem;
+  min-height: 300px;
 }
 
 .payee-footer {
   flex-shrink: 0;
-  padding: 1rem 2rem;
-  background: #fff;
-  border-top: 1px solid #e8f5e8;
-}
-
-.payee-header h2 {
-  color: #2c3e50;
-  margin: 0;
-  text-align: center;
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  font-weight: 600;
 }
 
 .add-payee-button {
   width: 100%;
   padding: 1rem;
-  background: #4caf50;
+  background: linear-gradient(135deg, var(--payee-success) 0%, #059669 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: var(--payee-radius);
+  font-size: clamp(1rem, 4vw, 1.1rem);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-height: 44px;
+  transition: var(--payee-transition);
+  min-height: 56px;
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-payee-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.add-payee-button:hover::before {
+  left: 100%;
 }
 
 .add-payee-button:hover {
-  background: #45a049;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
 }
 
 .add-payee-button:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
+}
+
+.payee-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--payee-bg-secondary);
+  transition: var(--payee-transition);
+}
+
+.payee-item:last-child {
+  border-bottom: none;
+}
+
+.payee-item:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
 .payee-button {
-  padding: 1.5rem;
-  border: 2px solid #e8f5e8;
-  border-radius: 8px;
-  background: #f8f9fa;
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid var(--payee-border);
+  border-radius: 12px;
+  background: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
+  transition: var(--payee-transition);
+  font-size: clamp(0.9rem, 3vw, 1rem);
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--payee-text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.payee-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.payee-button:hover::before {
+  left: 100%;
 }
 
 .payee-button:hover {
-  background: #e8f5e8;
-  border-color: #4caf50;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-color: var(--payee-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.payee-button:active {
+  transform: translateY(0);
 }
 
 .payee-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.payee-details {
+  flex: 1;
 }
 
 .payee-details h3 {
   margin: 0 0 0.5rem 0;
-  color: #2c3e50;
-}
-
-.payee-details p {
-  margin: 0;
-  color: #666;
-  font-size: 0.9rem;
+  color: var(--payee-text-primary);
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .bank-name {
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 3vw, 1rem);
   font-weight: 500;
-  color: #4caf50;
-}
-
-.payee-item {
-  display: flex;
-  gap: 0.5rem;
-  align-items: stretch;
-}
-
-.payee-button {
-  flex: 1;
+  color: var(--payee-success);
+  background: linear-gradient(135deg, var(--payee-success) 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .info-button {
-  padding: 1rem;
-  background: #2196f3;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, var(--payee-info) 0%, #1d4ed8 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-weight: 500;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 80px;
+  transition: var(--payee-transition);
+  min-width: 60px;
+  min-height: 44px;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.info-button:hover::before {
+  left: 100%;
 }
 
 .info-button:hover {
-  background: #1976d2;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
-/* Mobile optimizations */
-.device-mobile .payee-button {
-  min-height: 44px;
-  padding: 1rem;
+.info-button:active {
+  transform: translateY(0);
 }
 
-.device-mobile .info-button {
-  min-width: 44px;
-  min-height: 44px;
-}
-
-.touch-enabled .payee-button:active {
-  transform: scale(0.98);
-  background-color: #e9ecef;
-}
-
-.has-notch .payee-page {
-  padding-top: env(safe-area-inset-top, 44px);
-}
-
-@media (max-width: 480px) {
+/* Tablet styles */
+@media (min-width: 768px) {
   .payee-page-container {
-    max-width: 100%;
-  }
-  
-  .payee-header {
-    padding: 0.75rem 1rem;
-  }
-  
-  .payee-list-container {
-    padding: 0 1rem;
-  }
-  
-  .payee-footer {
-    padding: 1rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   }
   
   .payee-item {
-    margin-bottom: 0.75rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--payee-border);
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .payee-button {
+    padding: 1.25rem;
+  }
+  
+  .info-button {
+    min-width: 80px;
+    padding: 1rem 1.25rem;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .payee-page-container {
+    max-width: 700px;
+  }
+  
+  .payee-button {
+    padding: 1.5rem;
+  }
+  
+  .payee-details h3 {
+    font-size: 1.3rem;
+  }
+  
+  .bank-name {
+    font-size: 1.1rem;
+  }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1440px) {
+  .payee-page-container {
+    max-width: 800px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .payee-page-container {
+    padding: 0.5rem;
+  }
+  
+  .payee-header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .payee-item {
+    gap: 0.5rem;
+    padding: 0.5rem;
   }
   
   .payee-button {
     padding: 0.75rem;
   }
   
-  .payee-details h3 {
-    font-size: 1rem;
+  .info-button {
+    min-width: 50px;
+    padding: 0.75rem;
   }
 }
 
-@media (orientation: landscape) and (max-height: 500px) {
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .payee-page-container {
+    padding: 0.5rem;
+  }
+  
   .payee-header {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
   }
   
-  .payee-header h2 {
-    font-size: 1.2rem;
+  .payee-header h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .payee-button,
+  .info-button {
+    border-width: 0.5px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --payee-text-primary: #f1f5f9;
+    --payee-text-secondary: #cbd5e1;
+    --payee-bg-primary: #1e293b;
+    --payee-bg-secondary: #334155;
+    --payee-border: #475569;
   }
   
-  .payee-footer {
-    padding: 0.75rem 1rem;
+  .payee-page-container {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
   }
+  
+  .payee-header {
+    background: rgba(30, 41, 59, 0.95);
+  }
+  
+  .payee-list-container {
+    background: rgba(30, 41, 59, 0.95);
+  }
+  
+  .payee-button {
+    background: #334155;
+    border-color: #475569;
+    color: #f1f5f9;
+  }
+  
+  .payee-item:hover {
+    background: linear-gradient(135deg, #334155 0%, #475569 100%);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .payee-button,
+  .info-button,
+  .add-payee-button,
+  .payee-item {
+    transition: none;
+  }
+  
+  .payee-button::before,
+  .info-button::before,
+  .add-payee-button::before {
+    display: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.payee-button:focus-visible,
+.info-button:focus-visible,
+.add-payee-button:focus-visible {
+  outline: 3px solid var(--payee-info);
+  outline-offset: 2px;
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .payee-button {
+    min-height: 60px;
+  }
+  
+  .info-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .add-payee-button {
+    min-height: 56px;
+  }
+  
+  .payee-button:active {
+    transform: scale(0.98);
+    background-color: var(--payee-bg-secondary);
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

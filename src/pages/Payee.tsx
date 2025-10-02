@@ -159,7 +159,7 @@ export const PayeePage = () => {
             aria-label="Add a new payee to your contact list"
             type="button"
           >
-            Add Payee
+            + Add New Payee
           </button>
         </footer>
       </main>
