@@ -118,7 +118,7 @@ export const PayeePage = () => {
           <div role="listbox" aria-label="Available payees for money transfer">
             <VirtualizedList
               items={mockPayees}
-              itemHeight={80}
+              itemHeight={window.innerWidth >= 1024 ? 160 : window.innerWidth >= 768 ? 140 : 100}
               containerHeight={listHeight}
               className="payee-list"
               getItemKey={(payee) => payee.id}

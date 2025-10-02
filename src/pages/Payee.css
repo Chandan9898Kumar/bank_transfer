@@ -113,9 +113,10 @@
   display: flex;
   gap: 0.75rem;
   align-items: stretch;
-  padding: 0.75rem;
+  padding: 1rem;
   border-bottom: 1px solid var(--payee-bg-secondary);
   transition: var(--payee-transition);
+  min-height: 80px;
 }
 
 .payee-item:last-child {
@@ -251,15 +252,16 @@
   }
   
   .payee-item {
-    padding: 1rem;
-    margin: 0.5rem;
+    padding: 1.5rem 1rem;
+    margin: 1rem 0;
     border-radius: 12px;
     border: 1px solid var(--payee-border);
     background: rgba(255, 255, 255, 0.8);
+    min-height: 100px;
   }
   
   .payee-button {
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
   
   .info-button {
@@ -274,8 +276,13 @@
     max-width: 700px;
   }
   
+  .payee-item {
+    margin: 1.5rem 0;
+    padding: 2rem 1.5rem;
+  }
+  
   .payee-button {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
   
   .payee-details h3 {
